@@ -1,0 +1,17 @@
+{
+    "name": "heibosoft/jul-1",
+    "description": "Description of project Jul_1.",
+    "authors": [
+        {
+            "name": "HLO",
+            "email": "hlo@heibosoft.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "classmap": [
+            ""
+        ]
+    }
+}

@@ -1,3 +1,5 @@
+<?php require_once __DIR__ . '/vendor/autoload.php'; ?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -41,9 +43,15 @@ and open the template in the editor.
 				<div class="col-lg-12 text-center v-center">
 					<h1 class="hidden-link"><a href="./">ScrpЯ</a></h1>
 					<p class="lead">Your source for up2date data</p>
-					<br><br><br>
+					<br>
+                                        <?php 
+                                            $tester = new Tester;
+                                            $bam = $tester->add(4, 57);
+                                            echo "<h2>Tester->add(4, 57) result: $bam</h2>";
+                                        ?>
+                                        <br><br>
 					<hr>
-					<form class="col-lg-12" action="./signup.php" method="POST">
+                                        <form class="col-lg-12" action="./app/signup.php" method="POST">
 						<div class="input-group" style="width:340px;text-align:center;margin:0 auto;">
 							<input class="form-control input-lg" placeholder="Sign up with your email" type="email" name="email">
 							<span class="input-group-btn"><input class="btn btn-lg btn-primary" type="submit" value=">>"></span>
