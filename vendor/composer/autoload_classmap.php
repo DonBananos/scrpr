@@ -9,6 +9,7 @@ return array(
     'AutoLoader' => $baseDir . '/AutoLoader.php',
     'ComposerAutoloaderInitba706c060de45cf9901080198a05d84a' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
+    'Config' => $baseDir . '/config/config.php',
     'Tester' => $baseDir . '/app/model/Tester.php',
     'TesterTest' => $baseDir . '/Test Files/app/model/TesterTest.php',
 );
