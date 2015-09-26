@@ -16,6 +16,9 @@ and open the template in the editor.
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<!-- JQuery -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
     </head>
     <body>
 		<style>
@@ -45,12 +48,26 @@ and open the template in the editor.
 					<hr>
 					<form class="col-lg-12" action="./signup.php" method="POST">
 						<div class="input-group" style="width:340px;text-align:center;margin:0 auto;">
-							<input class="form-control input-lg" placeholder="Sign up with your email" type="email" name="email">
-							<span class="input-group-btn"><input class="btn btn-lg btn-primary" type="submit" value=">>"></span>
+							<input class="form-control input-lg" placeholder="Sign up with your email" type="email" name="email" id="email" onkeyup="checkEmail(this)">
+							<span class="input-group-btn"><button class="btn btn-lg btn-primary disabled" type="submit" id="button">>></button></span>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+		<script>
+			function checkEmail(val)
+			{
+				var len = val.value.length;
+				if (len > 5) 
+				{
+					$('#button').removeClass('disabled');
+				}
+				if (len < 6)
+				{
+					$('#button').addClass()('disabled');
+				}
+			}
+		</script>
     </body>
 </html>
