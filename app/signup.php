@@ -1,13 +1,45 @@
 <!DOCTYPE html>
-<?php 
+<?php
 //This should be done on all pages
-require_once __DIR__ . '/../vendor/autoload.php'; 
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $config = new Config();
 
-if (isset($_POST['email']))
+if (isset($_POST['email-submit']))
 {
 	$email = $_POST['email'];
+	$uc = new User_controller();
+	$email_check = $uc->check_if_email_is_free($email);
+}
+elseif (isset($_POST['signupsubmit']))
+{
+	$email = $_POST['email'];
+	$name = $_POST['name'];
+	$pass1 = $_POST['pass1'];
+	$pass2 = $_POST['pass2'];
+
+	$uc = new User_controller();
+	$uc->create_new_user($email, $name, $pass1, $pass2);
+}
+elseif(isset($_POST['sign-in-submit']))
+{
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	
+	$uc = new User_controller();
+	$sign_in_result = $uc->sign_user_in($email, $password);
+	if($sign_in_result)
+	{
+		?>
+<script>alert("HELLO!");</script>
+		<?php
+	}
+	else
+	{
+		?>
+<script>alert("BAAAH!");</script>
+		<?php
+	}
 }
 else
 {
@@ -33,38 +65,25 @@ else
 					<p class="lead">Your source for up2date data</p>
 					<br><br><br>
 					<hr>
-					<div>
-						<h3>Alright! So your email is <?php echo $email ?>?</h3>
-						<p class="lead">Let's just finish this up with a small bit of info!</p>
-					</div>
 					<div class="col-lg-4 col-md-4 col-sm-3 hidden-xs">
-
+						<!-- EMPTY DIV FOR ALIGNMENT -->
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
-						<form class="col-lg-12" action="<?php echo $config->get_base_url() ?>signup.php" method="POST">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input type="email" name="email" class="form-control" value="<?php echo $email ?>">
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input type="text" name="name" placeholder="What's your name?" class="form-control">
-							</div>
-							<br>
-							<br>
-							<br>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input type="password" name="pass1" placeholder="Password" class="form-control">
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input type="password" name="pass2" placeholder="Retype password" class="form-control">
-							</div>
-							<br>
-							<br>
-							<br>
-							<input class="btn btn-success btn-lg" value="Sign up!" type="submit">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<form class="col-lg-12" action=" " method="POST">
+						<?php
+						if (!$email_check)
+						{
+							require './view/login.php';
+						}
+						else
+						{
+							require './view/signup.php';
+						}
+						?>
 						</form>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-3 hidden-xs">
-
+						<!-- EMPTY DIV FOR ALIGNMENT -->
 					</div>
 				</div>
 			</div>

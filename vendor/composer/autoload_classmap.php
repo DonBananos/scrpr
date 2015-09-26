@@ -12,4 +12,7 @@ return array(
     'Config' => $baseDir . '/config/config.php',
     'Tester' => $baseDir . '/app/model/Tester.php',
     'TesterTest' => $baseDir . '/Test Files/app/model/TesterTest.php',
+    'User_controller' => $baseDir . '/app/controller/user_controller.php',
+    'User_model' => $baseDir . '/app/model/user_model.php',
+    'database_controller' => $baseDir . '/app/controller/database_controller.php',
 );

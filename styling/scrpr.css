@@ -14,3 +14,8 @@ body
 	text-decoration: none; 
 	color: inherit
 }
+
+.input-field
+{
+	margin-bottom: 10px !important;
+}
