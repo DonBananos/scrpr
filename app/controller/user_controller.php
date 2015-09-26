@@ -165,4 +165,12 @@ class User_controller
 		}
 		return false;
 	}
+	
+	public function get_user_name_from_id($id)
+	{
+		$uc = new User_model();
+		$user_name = $uc->get_user_name_from_id($id);
+		
+		return $user_name;
+	}
 }

@@ -1,3 +1,6 @@
+/*======================
+¤¤¤¤ Basic Features ¤¤¤¤
+======================*/
 body
 {
 	background-color: #01003b;
@@ -19,3 +22,80 @@ body
 {
 	margin-bottom: 10px !important;
 }
+
+@media(min-width:768px) 
+{
+	#page-wrapper
+	{
+		margin: 0 0 0 260px;
+        padding: 15px 30px;
+    }
+}
+
+/*========================
+¤¤¤¤ Navbar Side Menu ¤¤¤¤
+========================*/
+
+.navbar-header
+{
+	height: 80px;
+}
+
+#navbar-brand
+{
+	color: white;
+	margin: 0 auto;
+}
+
+#side-navbar
+{
+	background-color: #111;
+	height: 100vh;
+	transition: 1s;
+}
+
+.nav > li > a
+{
+	color: orange;
+	transition: 1s;
+	border-bottom: 1px solid #222;
+}
+
+.nav > li > a > span > .fa-chevron-down
+{
+	float: right;
+}
+
+.nav > li > a:hover
+{
+	background-color: #333 !important;
+	color: yellow;
+	transition: 1s;
+}
+
+#side-navbar > li > a
+{
+	padding-bottom: 15px;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+
+@media(min-width:768px)
+{
+    .navbar-side 
+	{
+        z-index: 1;
+        position: fixed;
+		top: 0;
+		left: 0;
+		width: 260px;
+    }
+
+	.navbar 
+	{
+		border-radius: 0px; 
+	}
+}
+
+
+

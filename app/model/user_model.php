@@ -146,6 +146,32 @@ class User_model
 		}
 		return false;
 	}
+	
+	public function get_user_name_from_id($id)
+	{
+		$user_config = new Config();
+		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$db_con = $dbc->get_db_con();
+
+		$sql = "SELECT user_name FROM user WHERE user_id = ?;";
+		$stmt = $db_con->prepare($sql);
+		if ($stmt === false)
+		{
+			trigger_error('SQL Error: ' . $db_con->error, E_USER_ERROR);
+		}
+		$stmt->bind_param('i', $id); //Bind parameters.
+		$stmt->execute(); //Execute
+		$stmt->bind_result($user_name); //Get ResultSet
+		$stmt->fetch();
+		$stmt->close();
+		$dbc->terminate_connection();
+
+		if (!empty($user_name))
+		{
+			return $user_name;
+		}
+		return false;
+	}
 
 	public function get_all_user_roles()
 	{

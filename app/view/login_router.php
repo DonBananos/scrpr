@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 //This should be done on all pages
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 $config = new Config();
 
@@ -31,7 +31,7 @@ elseif(isset($_POST['sign-in-submit']))
 	if($sign_in_result)
 	{
 		?>
-<script>alert("HELLO!");</script>
+<script>alert("Welcome!");window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php';</script>
 		<?php
 	}
 	else
@@ -50,12 +50,11 @@ else
 	<?php
 }
 ?>
-<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="UTF-8">
         <title>Scrpr | Your source for up2date data</title>
-		<?php require '../config/head.php'; ?>
+		<?php require '../../config/head.php'; ?>
 	</head>
 	<body>
 		<div class="container-full">
@@ -73,11 +72,11 @@ else
 						<?php
 						if (!$email_check)
 						{
-							require './view/login.php';
+							require './login.php';
 						}
 						else
 						{
-							require './view/signup.php';
+							require './signup.php';
 						}
 						?>
 						</form>
