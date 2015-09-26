@@ -1,0 +1,16 @@
+body
+{
+	background-color: #01003b;
+	color: orange
+}
+.v-center {
+	margin-top:7%;
+}
+.hidden-link a,
+.hidden-link a:hover,
+.hidden-link a:active,
+.hidden-link a:visited
+{
+	text-decoration: none; 
+	color: inherit
+}

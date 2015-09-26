@@ -1,4 +1,10 @@
-<?php
+<!DOCTYPE html>
+<?php 
+//This should be done on all pages
+require_once __DIR__ . '/../vendor/autoload.php'; 
+
+$config = new Config();
+
 if (isset($_POST['email']))
 {
 	$email = $_POST['email'];
@@ -17,38 +23,13 @@ else
 	<head>
 		<meta charset="UTF-8">
         <title>Scrpr | Your source for up2date data</title>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<?php require '../config/head.php'; ?>
 	</head>
 	<body>
-		<style>
-			body
-			{
-				background-color: #01003b;
-				color: orange
-			}
-			.v-center {
-				margin-top:7%;
-			}
-			.hidden-link a,
-			.hidden-link a:hover,
-			.hidden-link a:active,
-			.hidden-link a:visited
-			{
-				text-decoration: none; 
-				color: inherit
-			}
-		</style>
 		<div class="container-full">
 			<div class="row">
 				<div class="col-lg-12 text-center v-center">
-					<h1 class="hidden-link"><a href="./">ScrpЯ</a></h1>
+					<h1 class="hidden-link"><a href="<?php echo $config->get_base_url() ?>">ScrpЯ</a></h1>
 					<p class="lead">Your source for up2date data</p>
 					<br><br><br>
 					<hr>
@@ -60,7 +41,7 @@ else
 
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
-						<form class="col-lg-12" action="./signup.php" method="POST">
+						<form class="col-lg-12" action="<?php echo $config->get_base_url() ?>signup.php" method="POST">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 								<input type="email" name="email" class="form-control" value="<?php echo $email ?>">
 							</div>
