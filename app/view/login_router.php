@@ -21,23 +21,24 @@ elseif (isset($_POST['signupsubmit']))
 	$uc = new User_controller();
 	$uc->create_new_user($email, $name, $pass1, $pass2);
 }
-elseif(isset($_POST['sign-in-submit']))
+elseif (isset($_POST['sign-in-submit']))
 {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
-	
+
 	$uc = new User_controller();
 	$sign_in_result = $uc->sign_user_in($email, $password);
-	if($sign_in_result)
+	if ($sign_in_result)
 	{
 		?>
-<script>alert("Welcome!");window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php';</script>
+		<script>alert("Welcome!");
+			window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php';</script>
 		<?php
 	}
 	else
 	{
 		?>
-<script>alert("BAAAH!");</script>
+		<script>alert("BAAAH!");</script>
 		<?php
 	}
 }
@@ -49,6 +50,13 @@ else
 	</script>
 	<?php
 }
+if (isset($_SESSION['user_id']))
+{
+	?>
+	<script>window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php'</script>
+	<?php
+}
+?>
 ?>
 <html>
 	<head>
@@ -69,16 +77,16 @@ else
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 						<form class="col-lg-12" action=" " method="POST">
-						<?php
-						if (!$email_check)
-						{
-							require './login.php';
-						}
-						else
-						{
-							require './signup.php';
-						}
-						?>
+							<?php
+							if (!$email_check)
+							{
+								require './login.php';
+							}
+							else
+							{
+								require './signup.php';
+							}
+							?>
 						</form>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-3 hidden-xs">

@@ -1,0 +1,79 @@
+/*======================
+¤¤¤¤ Basic Features ¤¤¤¤
+======================*/
+body
+{
+	background-color: #01003b;
+	color: orange
+}
+.v-center {
+	margin-top:7%;
+}
+.hidden-link a,
+.hidden-link a:hover,
+.hidden-link a:active,
+.hidden-link a:visited
+{
+	text-decoration: none; 
+	color: inherit
+}
+
+.input-field
+{
+	margin-bottom: 10px !important;
+}
+
+#page-wrapper
+{
+	background-color: #01003b;
+}
+
+#page-inner
+{
+	background-color: #01003b;
+}
+
+@media(min-width:768px) 
+{
+	#page-wrapper
+	{
+		margin: 0 0 0 260px;
+        padding: 15px 30px;
+    }
+}
+
+#main-menu
+{
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #202020;
+	width: 220px;
+}
+
+.navbar-brand
+{
+	height: 80px;
+	display: block;
+}
+
+#brand
+{
+	margin: 0 auto;
+	color: white;
+	background-color: black;
+	font-size: 250%;
+	text-align: center;
+}
+
+.bottom-link
+{
+	color: white;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 89px;
+	border-top: 1px solid transparent;
+	overflow: visible;
+}

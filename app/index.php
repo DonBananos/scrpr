@@ -4,6 +4,12 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $config = new Config();
+if (isset($_SESSION['user_id']))
+{
+	?>
+	<script>window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php'</script>
+	<?php
+}
 ?>
 
 <!--

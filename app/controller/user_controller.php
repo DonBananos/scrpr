@@ -11,11 +11,11 @@ class User_controller
 	public function create_new_user($email, $name, $password1, $password2, $role = 1)
 	{
 		$um = new User_model();
-		if(!$this->validate_email($email))
+		if (!$this->validate_email($email))
 		{
 			die("Email validation error");
 		}
-		if(!$this->validate_passwords($password1, $password2))
+		if (!$this->validate_passwords($password1, $password2))
 		{
 			die("Password validation error");
 		}
@@ -27,20 +27,20 @@ class User_controller
 		$result = $um->save_new_user($email, $name, $password, $salt, $role);
 		return $result;
 	}
-	
+
 	private function hash_password($password, $salt)
 	{
 		/*
 		 * Function that receives a password and a salt, and hashes the password
 		 * using the received salt
 		 */
-		
+
 		//Hash password
 		$hashed_password = hash_hmac('sha512', $password, $salt);
 		//Return that hashed password
 		return $hashed_password;
 	}
-	
+
 	private function generate_salt()
 	{
 		/*
@@ -102,7 +102,7 @@ class User_controller
 		//Match password with the pattern
 		$regex_result = preg_match($regex_password, $password);
 		//If match of pattern and password is correct
-		if($regex_result === 1)
+		if ($regex_result === 1)
 		{
 			//Return false
 			return true;
@@ -110,7 +110,7 @@ class User_controller
 		//else return false
 		return false;
 	}
-	
+
 	public function check_if_email_is_free($email)
 	{
 		/*
@@ -120,14 +120,14 @@ class User_controller
 		$um = new User_model();
 		//if the result of the search_for_email function in the user model is 
 		//more than 0
-		if($um->search_for_email($email) > 0)
+		if ($um->search_for_email($email) > 0)
 		{
 			return false;
 		}
 		//else return true (THIS IS WHAT WE WANT!)
 		return true;
 	}
-	
+
 	private function check_if_valid_user_role($role)
 	{
 		/*
@@ -138,15 +138,14 @@ class User_controller
 		//Get if role is in db, and return true or false (true if it is in db)
 		return $um->check_if_valid_user_role($role);
 	}
-	
+
 	public function sign_user_in($email, $password)
 	{
 		$email_check = $this->check_if_email_is_free($email);
-		if(!$email_check)
+		if (!$email_check)
 		{
 			echo 'User Email is existing!<br>';
 			//Email is in use, this is good!
-			
 			//New instance of User Model
 			$um = new User_model();
 			//Get salt from user model
@@ -155,7 +154,7 @@ class User_controller
 			$hashed_password = $this->hash_password($password, $salt);
 			//Check if credentials are correct
 			$result = $um->check_if_hashed_password_matches_email($email, $hashed_password);
-			if(is_int($result) AND $result > 0)
+			if (is_int($result) AND $result > 0)
 			{
 				$_SESSION['signed_in'] = true;
 				$_SESSION['user_id'] = true;
@@ -165,12 +164,13 @@ class User_controller
 		}
 		return false;
 	}
-	
+
 	public function get_user_name_from_id($id)
 	{
 		$uc = new User_model();
 		$user_name = $uc->get_user_name_from_id($id);
-		
+
 		return $user_name;
 	}
+
 }
