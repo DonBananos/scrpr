@@ -3,4 +3,4 @@ RewriteEngine On
 #Redirect all pages that does not end with .php
 RewriteCond %{REQUEST_FILENAME} !-d [NC]
 RewriteCond %{REQUEST_FILENAME} !-f [NC]
-RewriteRule ^app/([^\.]+)$ app/view/$1.php [NC,L]
+RewriteRule ^app/([^\.]+)/?$ app/view/$1.php [NC,L]

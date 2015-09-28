@@ -19,7 +19,7 @@
 					</a>
 					<ul class="nav nav-second-level" style="display: none" id="target-menu">
 						<li>
-							<a href="#" class="menu-item"><span class="fa fa-plus"></span> New Target</a>
+							<a href="<?php echo $config->get_base_url() ?>target/" class="menu-item"><span class="fa fa-plus"></span> New Target</a>
 						</li>
 						<li>
 							<a href="#" class="menu-item"><span class="fa fa-link"></span> My Target</a>

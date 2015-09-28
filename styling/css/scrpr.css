@@ -49,7 +49,7 @@ body
 	top: 0;
 	left: 0;
 	background-color: #202020;
-	width: 220px;
+	width: 250px;
 	overflow-y: auto;
 }
 
@@ -80,7 +80,7 @@ body
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	width: 220px;
+	width: 250px;
 }
 
 .top-menu > li
@@ -124,4 +124,11 @@ body
 #target-menu > .menu-item :first-child
 {
 	color: orange;
+}
+
+#page-wrapper,
+#page-inner,
+#page-wrapper > #page-inner
+{
+	background-color: #01003b !important;
 }

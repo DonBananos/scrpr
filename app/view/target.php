@@ -22,17 +22,15 @@ else
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Dashboard | Scrpr</title>
+		<title>Target | Scrpr</title>
 		<?php require '../../config/head.php'; ?>
 	</head>
 	<body>
 		<?php require './navbar/navbar.php'; ?>
-		<div id="page-wrapper" >
-            <div id="page-inner">
-				<div class="page-header">
-					<h1>Welcome <?php echo $active_user_name ?></h1>
-					<p class="lead">Great to see you again!</p>
-				</div>
+		<div id="page-wrapper">
+			<div class="page-header">
+				<h1>New Target</h1>
+				<p class="lead">Create a new Target to spy on</p>
 			</div>
 		</div>
 		<?php require './footer.php'; ?>
