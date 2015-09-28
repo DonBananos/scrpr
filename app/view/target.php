@@ -20,6 +20,22 @@ else
 	<script>window.location = '<?php echo $config->get_base_url(); ?>';</script>
 	<?php
 }
+
+if(isset($_GET['id']))
+{
+	$new = false;
+	$target_id = $_GET['id'];
+}
+else
+{
+	$new = true;
+	$headline = "New Target";
+	$lead = "Create a new Target to spy on";
+	$title = "Unnamed Target";
+	$subtitle = "Unnamed Target's subtitle";
+	$url = "http://www.domain.com/section-to-be-crawled/";
+	$created = date("d/m-Y", time());
+}
 ?>
 <html>
 	<head>
@@ -31,9 +47,9 @@ else
 		<?php require './navbar/navbar.php'; ?>
 		<div id="page-wrapper">
 			<div class="page-header">
-				<h1>New Target</h1>
+				<h1><?php echo $headline ?></h1>
 				<p class="lead" id="subtitle">
-					Create a new Target to spy on
+					<?php echo $lead ?>
 					<span class="pull-right last-login-span">
 						<i>Last login:</i> 28/09/2015
 					</span>
@@ -44,14 +60,14 @@ else
 					<div class="content-box">
 						<form>
 							<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-								<input type="text" name="title" value="Unnamed Target" class="form-control title-input invisible-input" onclick="this.select();">
+								<input type="text" name="title" value="<?php echo $title ?>" class="form-control title-input invisible-input" onclick="this.select();">
 							</div>
 							<div class="col-lg-6 col-md-4 col-sm-2 hidden-xs">
-								<label class="pull-right form-label">Created: 28/09-2015</label>
+								<label class="pull-right form-label">Created: <?php echo $created ?></label>
 							</div>
 							<div class="clearfix"></div>
 							<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-								<input type="text" name="subtitle" value="Unnamed Target's subtitle" class="form-control subtitle-input invisible-input" onclick="this.select();">
+								<input type="text" name="subtitle" value="<?php echo $subtitle ?>" class="form-control subtitle-input invisible-input" onclick="this.select();">
 							</div>
 							<div class="col-lg-6 col-md-4 col-sm-2 hidden-xs">
 								<label class="pull-right form-label">Owner: <?php echo $active_user_name ?></label>
@@ -59,22 +75,24 @@ else
 							<div class="clearfix"></div>
 							<hr>
 							<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-								<input type="url" name="url" value="http://www.domain.com/section-to-be-crawled/" class="form-control" onclick="this.select();">
+								<input type="url" name="url" value="<?php echo $url ?>" class="form-control" onclick="this.select();">
 							</div>
 							<div class="clearfix"></div>
 							<br>
 							<div id="keyword-area">
 								<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-									<input type="text" name="keyword-1-name" placeholder="Keyword Name" class="form-control">
+									<input type="text" name="keyword-name[]" placeholder="Keyword Name" class="form-control">
 								</div>
 								<div class="col-lg-7 col-md-7 col-sm-8 col-xs-6">
-									<input type="text" name="keyword-1-name" placeholder="Keyword Path" class="form-control">
+									<input type="text" name="keyword-path[]" placeholder="Keyword Path" class="form-control">
 								</div>
 								<div class="clearfix"></div>
+								<br>
 							</div>
 							<br>
 							<div class="col-lg-12">
 								<a class="btn btn-default" onClick="AddKeywordRow()"><span class="fa fa-plus"></span> Add Keyword</a>
+								<input type="submit" class="btn btn-primary" value="Save Target">
 							</div>
 							<div class="clearfix"></div>
 						</form>
@@ -94,7 +112,8 @@ else
 		<script>
 		function AddKeywordRow()
 		{
-			alert("Adding keyword Row");
+			var newField = "<div class='col-lg-3 col-md-3 col-sm-4 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Name' name='keyword-name[]'></div><div class='col-lg-7 col-md-7 col-sm-8 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Path' name='keyword-path[]'></div><div class='clearfix'></div><br>";
+			$('#keyword-area').append(newField);
 		}
 		</script>
 	</body>

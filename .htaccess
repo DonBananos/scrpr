@@ -1,5 +1,15 @@
 RewriteEngine On
 
+#Redirect for target creation, edit and details
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+RewriteRule ^app/target/?$ app/view/target.php [NC,L]
+
+#Redirect for target creation, edit and details
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+RewriteRule ^app/target/([0-9]*)/?$ app/view/target.php?id=$1 [NC,L]
+
 #Redirect all pages that does not end with .php
 RewriteCond %{REQUEST_FILENAME} !-d [NC]
 RewriteCond %{REQUEST_FILENAME} !-f [NC]

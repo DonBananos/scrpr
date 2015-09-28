@@ -19,19 +19,19 @@
 					</a>
 					<ul class="nav nav-second-level" style="display: none" id="target-menu">
 						<li>
-							<a href="<?php echo $config->get_base_url() ?>target" class="menu-item" view_id = "2">
+							<a href="<?php echo $config->get_base_url() ?>target/" class="menu-item" view_id = "2">
 								<span class="fa fa-plus"></span> 
 								New Target
 							</a>
 						</li>
 						<li>
-							<a href="#" class="menu-item"><span class="fa fa-link"></span> My Target</a>
+							<a href="<?php echo $config->get_base_url() ?>target/15/" class="menu-item"><span class="fa fa-link"></span> My Target</a>
 						</li>
 						<li>
-							<a href="#" class="menu-item"><span class="fa fa-link"></span> My Target</a>
+							<a href="<?php echo $config->get_base_url() ?>target/735/" class="menu-item"><span class="fa fa-link"></span> My Target</a>
 						</li>
 						<li>
-							<a href="#" class="menu-item"><span class="fa fa-link"></span> My Target</a>
+							<a href="<?php echo $config->get_base_url() ?>target/13/" class="menu-item"><span class="fa fa-link"></span> My Target</a>
 						</li>
 					</ul>
 				</li>  

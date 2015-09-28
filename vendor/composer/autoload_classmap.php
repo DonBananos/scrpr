@@ -11,8 +11,11 @@ return array(
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
     'Config' => $baseDir . '/config/Config.php',
     'Database_controller' => $baseDir . '/app/controller/Database_controller.php',
+    'Target_controller' => $baseDir . '/app/controller/target_controller.php',
+    'Target_model' => $baseDir . '/app/model/target_model.php',
     'Tester' => $baseDir . '/app/model/Tester.php',
     'TesterTest' => $baseDir . '/Test Files/app/model/TesterTest.php',
     'User_controller' => $baseDir . '/app/controller/User_controller.php',
+    'User_controllerTest' => $baseDir . '/Test Files/app/controller/User_controllerTest.php',
     'User_model' => $baseDir . '/app/model/User_model.php',
 );
