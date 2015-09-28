@@ -48,7 +48,7 @@ class Target_controller
 		return $subtitle;
 	}
 
-	private function check_on_url($url)
+	public function check_on_url($url)
 	{
 
 		$newurl = "";
@@ -60,9 +60,10 @@ class Target_controller
 		{
 			$newurl = $url;
 		}
+                
 		if (!filter_var($newurl, FILTER_VALIDATE_URL) === false)
 		{
-			return $url;
+			return $newurl;
 		}
 		else
 		{
