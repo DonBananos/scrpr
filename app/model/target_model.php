@@ -61,15 +61,13 @@ class Target_model
 		{
 			trigger_error('SQL Error: ' . $db_con->error, E_USER_ERROR);
 		}
-		//Bind parameters.
-		$stmt->bind_param('i', $id);
-		//Execute
-		$stmt->execute();
-		//Get ID of user just saved
+		$stmt->bind_param('i', $id); //Bind parameters.
+		$stmt->execute(); //Execute
 		$stmt->bind_result($title, $subtitle, $url, $owner_id, $datetime); //Get ResultSet
 		$stmt->fetch();
 		$stmt->close();
 		$dbc->terminate_connection();
+		
 		$details = array();
 		$details['title'] = $title;
 		$details['subtitle'] = $subtitle;

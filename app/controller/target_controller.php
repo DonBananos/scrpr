@@ -66,7 +66,11 @@ class Target_controller
 	
 	public function get_target_details_on_id($id)
 	{
-		if(is_int($id) AND $id > 0)
+		if(!is_int($id))
+		{
+			$id = intval($id);
+		}
+		if($id > 0)
 		{
 			$tm = new Target_model();
 			$details = $tm->get_array_of_target_details($id);

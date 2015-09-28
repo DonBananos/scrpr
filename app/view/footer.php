@@ -42,8 +42,17 @@
 	$('a.menu-item[href="' + url + '"]').addClass('active-menu');
 
 	// Will also work for relative and absolute hrefs
-	$('a.menu-item').filter(function () 
+	$('a.menu-item').filter(function ()
 	{
 		return this.href == url;
 	}).addClass('active-menu');
+	
+	if ($('#target-menu li a').hasClass('active-menu'))
+	{
+		$(this).attr('next', 'up');
+		$('#target-li').addClass('submenu-shown');
+		setTimeout(function () {
+			$('#target-menu').slideDown(250);
+		}, 200);
+	}
 </script>
