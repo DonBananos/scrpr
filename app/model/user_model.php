@@ -177,5 +177,31 @@ class User_model
 	{
 		
 	}
+	
+	public function get_user_id_from_email($email)
+	{
+		$user_config = new Config();
+		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$db_con = $dbc->get_db_con();
+
+		$sql = "SELECT user_id FROM user WHERE user_email = ?;";
+		$stmt = $db_con->prepare($sql);
+		if ($stmt === false)
+		{
+			trigger_error('SQL Error: ' . $db_con->error, E_USER_ERROR);
+		}
+		$stmt->bind_param('s', $email); //Bind parameters.
+		$stmt->execute(); //Execute
+		$stmt->bind_result($user_id); //Get ResultSet
+		$stmt->fetch();
+		$stmt->close();
+		$dbc->terminate_connection();
+
+		if (!empty($user_id))
+		{
+			return $user_id;
+		}
+		return false;
+	}
 
 }

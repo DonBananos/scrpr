@@ -156,7 +156,7 @@ class User_controller
 			if (is_int($result) AND $result > 0)
 			{
 				$_SESSION['signed_in'] = true;
-				$_SESSION['user_id'] = true;
+				$_SESSION['user_id'] = $um->get_user_id_from_email($email);
 				return true;
 			}
 			return false;
