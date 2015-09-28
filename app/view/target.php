@@ -19,12 +19,37 @@ else
 	?>
 	<script>window.location = '<?php echo $config->get_base_url(); ?>';</script>
 	<?php
+	die();
+}
+$tc = new Target_controller();
+if (isset($_POST['target-submit']))
+{
+	$title = $_POST['title'];
+	$subtitle = $_POST['subtitle'];
+	$url = $_POST['url'];
+	$user_id = $_SESSION['user_id'];
+
+	$result = $tc->create_new_target($title, $subtitle, $url, $user_id);
+	if (is_int($result))
+	{
+		?>
+		<script>window.location = '<?php echo $config->get_base_url(); ?>target/<?php echo $result ?>/';</script>
+		<?php
+	}
 }
 
-if(isset($_GET['id']))
+if (isset($_GET['id']))
 {
 	$new = false;
 	$target_id = $_GET['id'];
+	$target_details = $tc->get_target_details_on_id($target_id);
+	$headline = $target_details['title'];
+	$lead = $target_details['subtitle'];
+	$title = $headline;
+	$subtitle = $lead;
+	$url = $target_details['url'];
+	$created = date("d/m-Y", $target_details['datetime']);
+	$user = $target_details['owner_id'];
 }
 else
 {
@@ -58,7 +83,7 @@ else
 			<div id="page-inner">
 				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 					<div class="content-box">
-						<form>
+						<form action="" method="POST">
 							<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
 								<input type="text" name="title" value="<?php echo $title ?>" class="form-control title-input invisible-input" onclick="this.select();">
 							</div>
@@ -92,7 +117,7 @@ else
 							<br>
 							<div class="col-lg-12">
 								<a class="btn btn-default" onClick="AddKeywordRow()"><span class="fa fa-plus"></span> Add Keyword</a>
-								<input type="submit" class="btn btn-primary" value="Save Target">
+								<input type="submit" class="btn btn-primary" value="Save Target" name="target-submit">
 							</div>
 							<div class="clearfix"></div>
 						</form>
@@ -110,11 +135,11 @@ else
 		</div>
 		<?php require './footer.php'; ?>
 		<script>
-		function AddKeywordRow()
-		{
-			var newField = "<div class='col-lg-3 col-md-3 col-sm-4 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Name' name='keyword-name[]'></div><div class='col-lg-7 col-md-7 col-sm-8 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Path' name='keyword-path[]'></div><div class='clearfix'></div><br>";
-			$('#keyword-area').append(newField);
-		}
+			function AddKeywordRow()
+			{
+				var newField = "<div class='col-lg-3 col-md-3 col-sm-4 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Name' name='keyword-name[]'></div><div class='col-lg-7 col-md-7 col-sm-8 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Path' name='keyword-path[]'></div><div class='clearfix'></div><br>";
+				$('#keyword-area').append(newField);
+			}
 		</script>
 	</body>
 </html>

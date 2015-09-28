@@ -23,6 +23,8 @@ class Target_controller
 		$target_owner_user_id = $this->check_on_user_id($user_id);
 		
 		$result = $tm->save_new_target($title, $target_subtitle, $target_url, $target_owner_user_id);
+		
+		return $result;
 	}
 	
 	private function check_on_target_title($title)
@@ -58,6 +60,17 @@ class Target_controller
 		if($user_id == $_SESSION['user_id'])
 		{
 			return true;
+		}
+		return false;
+	}
+	
+	public function get_target_details_on_id($id)
+	{
+		if(is_int($id) AND $id > 0)
+		{
+			$tm = new Target_model();
+			$details = $tm->get_array_of_target_details($id);
+			return $details;
 		}
 		return false;
 	}
