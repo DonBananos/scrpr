@@ -19,6 +19,10 @@ class Target_controller
 			die("There needs to be a Target title!");
 		}
 		$target_subtitle = $this->check_on_subtitle($subtitle);
+		$target_url = $this->check_on_url($url);
+		$target_owner_user_id = $this->check_on_user_id($user_id);
+		
+		$result = $tm->save_new_target($title, $target_subtitle, $target_url, $target_owner_user_id);
 	}
 	
 	private function check_on_target_title($title)
@@ -44,6 +48,9 @@ class Target_controller
 	{
 		//Some testing on protocol - Insert http:// if missing
 		//Some testing on www. - Insert if missing
+		
+		//Return correct url
+		Return $url;
 	}
 	
 	private function check_on_user_id($user_id)
