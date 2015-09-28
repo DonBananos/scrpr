@@ -144,7 +144,6 @@ class User_controller
 		$email_check = $this->check_if_email_is_free($email);
 		if (!$email_check)
 		{
-			echo 'User Email is existing!<br>';
 			//Email is in use, this is good!
 			//New instance of User Model
 			$um = new User_model();

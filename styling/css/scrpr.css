@@ -50,6 +50,14 @@ body
 	left: 0;
 	background-color: #202020;
 	width: 220px;
+	overflow-y: auto;
+}
+
+.menu-icon
+{
+	width: 60px;
+	padding-right: 10px;
+	text-align: center;
 }
 
 .navbar-brand
@@ -67,13 +75,53 @@ body
 	text-align: center;
 }
 
-.bottom-link
+.bottom-menu
 {
-	color: white;
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	height: 89px;
-	border-top: 1px solid transparent;
-	overflow: visible;
+	width: 220px;
+}
+
+.top-menu > li
+{
+	border-bottom: 1px solid #555;
+}
+
+.bottom-menu > li
+{
+	border-top: 1px solid #555;
+}
+
+.submenu-shown
+{
+	border-bottom: 1px solid red;
+}
+
+.bottom-menu-half-item:first-child
+{
+	border-right: 1px solid #555;
+}
+
+#bottom-menu-dual-area > a
+{
+	width: 50%;	
+	display: inline;
+}
+
+#bottom-menu-dual-area > .menu-item
+{
+	display: inline-block;
+	width: 49%;
+}
+
+#bottom-menu-dual-area:last-child
+{
+	padding: 0;
+	margin: 0;
+}
+
+#target-menu > .menu-item :first-child
+{
+	color: orange;
 }

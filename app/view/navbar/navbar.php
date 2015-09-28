@@ -1,16 +1,19 @@
 <nav class="navbar-default navbar-side" role="navigation" id="side-menu">
 	<div class="sidebar-collapse">
 		<div id="main-menu">
-			<ul class="nav">
+			<ul class="nav top-menu">
 				<li>
 					<a href="<?php echo $config->get_base_url() ?>" id="brand">ScrpR</a>
 				</li>
 				<li>
-					<a class="active-menu menu-item"  href="<?php echo $config->get_base_url() ?>dashboard"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+					<a class="active-menu menu-item"  href="<?php echo $config->get_base_url() ?>dashboard">
+						<span class="fa fa-dashboard fa-3x menu-icon"></span> 
+						Dashboard
+					</a>
 				</li>
 				<li>
 					<a href="#" id="target-li">
-						<span class="fa fa-link fa-3x"></span> 
+						<span class="fa fa-link fa-3x menu-icon"></span> 
 						Targets
 						<span class="fa arrow"></span>
 					</a>
@@ -31,16 +34,26 @@
 				</li>  
 				<li>
 					<a href="#" class="menu-item">
-						<span class="fa fa-lightbulb-o fa-3x"></span> 
+						<span class="fa fa-lightbulb-o fa-3x menu-icon"></span> 
 						Results
 					</a>
 				</li>
 			</ul>
-			<ul class="botoom-menu nav">
-				<li class="bottom-link">
-					<a href="#" id="target-li" class="menu-item">
-						<span class="fa fa-lightbulb-o fa-3x"></span> 
-						Results
+			<ul class="bottom-menu nav">
+				<li id="bottom-menu-dual-area">
+					<a href="#" class="menu-item bottom-menu-half-item text-center">
+						<span class="fa fa-lock fa-2x bottom-menu-half-item-icon"></span><br>
+						Logout
+					</a>
+					<a href="#" class="menu-item bottom-menu-half-item text-center">
+						<span class="fa fa-user fa-2x"></span><br>
+						Profile
+					</a>
+				</li>
+				<li>
+					<a href="#" class="menu-item">
+						<span class="fa fa-cog fa-3x menu-icon"></span> 
+						Settings
 					</a>
 				</li>
 			</ul>
