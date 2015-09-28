@@ -16,7 +16,7 @@ class User_model
 	public function save_new_user($email, $name, $password, $salt, $role)
 	{
 		$user_config = new Config();
-		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
 
 		//Create SQL Query
@@ -49,7 +49,7 @@ class User_model
 	public function search_for_email($email)
 	{
 		$user_config = new Config();
-		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
 
 		$sql = "SELECT COUNT(*) AS users FROM user WHERE user_email = ?;";
@@ -71,7 +71,7 @@ class User_model
 	public function check_if_valid_user_role($id)
 	{
 		$user_config = new Config();
-		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
 
 		$sql = "SELECT user_role_short FROM user_role WHERE user_role_id = ?;";
@@ -98,7 +98,7 @@ class User_model
 	public function get_salt_via_email($email)
 	{
 		$user_config = new Config();
-		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
 
 		$sql = "SELECT user_salt FROM user WHERE user_email = ?;";
@@ -124,7 +124,7 @@ class User_model
 	public function check_if_hashed_password_matches_email($email, $password)
 	{
 		$user_config = new Config();
-		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
 
 		$sql = "SELECT user_id FROM user WHERE user_email = ? AND user_password = ?;";
@@ -150,7 +150,7 @@ class User_model
 	public function get_user_name_from_id($id)
 	{
 		$user_config = new Config();
-		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
 
 		$sql = "SELECT user_name FROM user WHERE user_id = ?;";
@@ -181,7 +181,7 @@ class User_model
 	public function get_user_id_from_email($email)
 	{
 		$user_config = new Config();
-		$dbc = new database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
 
 		$sql = "SELECT user_id FROM user WHERE user_email = ?;";

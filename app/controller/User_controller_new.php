@@ -41,7 +41,7 @@ class User_controller
 		return $hashed_password;
 	}
 
-	private function generate_salt()
+	public function generate_salt()
 	{
 		/*
 		 * Function to create a random salt for each user
@@ -54,7 +54,7 @@ class User_controller
 		return $salt;
 	}
 
-	private function validate_email($email)
+	public function validate_email($email)
 	{
 		/*
 		 * Function that checks if email is valid

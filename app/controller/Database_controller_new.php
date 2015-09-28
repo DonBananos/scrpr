@@ -2,7 +2,7 @@
 /*
  * This object creates a connection to the database.
  */
-class database_controller
+class Database_controller
 {
 
 	private $db_con;

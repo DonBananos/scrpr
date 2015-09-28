@@ -14,7 +14,7 @@
 <link href="<?php echo $config->get_base_url() ?>../styling/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
 
 <!-- Custom CSS -->
-<link href="<?php echo $config->get_base_url() ?>../styling/css/custom.css" rel="stylesheet" />'
+<link href="<?php echo $config->get_base_url() ?>../styling/css/custom.css" rel="stylesheet" />
 
 <!-- Google Fonts -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
