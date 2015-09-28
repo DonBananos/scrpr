@@ -5,6 +5,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $config = new Config();
 
+$view_id = 2; //New Target View
+
 if (isset($_SESSION['user_id']))
 {
 	$active_user_id = $_SESSION['user_id'];
@@ -30,7 +32,12 @@ else
 		<div id="page-wrapper">
 			<div class="page-header">
 				<h1>New Target</h1>
-				<p class="lead">Create a new Target to spy on</p>
+				<p class="lead" id="subtitle">
+					Create a new Target to spy on
+					<span class="pull-right last-login-span">
+						<i>Last login:</i> 28/09/2015
+					</span>
+				</p>
 			</div>
 		</div>
 		<?php require './footer.php'; ?>

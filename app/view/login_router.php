@@ -53,7 +53,7 @@ else
 if (isset($_SESSION['user_id']))
 {
 	?>
-	<script>window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php';</script>
+	<script>window.location = '<?php echo $config->get_base_url() ?>dashboard';</script>
 	<?php
 }
 ?>

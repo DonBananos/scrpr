@@ -6,7 +6,7 @@
 					<a href="<?php echo $config->get_base_url() ?>" id="brand">ScrpR</a>
 				</li>
 				<li>
-					<a class="active-menu menu-item"  href="<?php echo $config->get_base_url() ?>dashboard">
+					<a class="active-menu menu-item"  href="<?php echo $config->get_base_url() ?>dashboard" view_id = "1">
 						<span class="fa fa-dashboard fa-3x menu-icon"></span> 
 						Dashboard
 					</a>
@@ -19,7 +19,10 @@
 					</a>
 					<ul class="nav nav-second-level" style="display: none" id="target-menu">
 						<li>
-							<a href="<?php echo $config->get_base_url() ?>target/" class="menu-item"><span class="fa fa-plus"></span> New Target</a>
+							<a href="<?php echo $config->get_base_url() ?>target" class="menu-item" view_id = "2">
+								<span class="fa fa-plus"></span> 
+								New Target
+							</a>
 						</li>
 						<li>
 							<a href="#" class="menu-item"><span class="fa fa-link"></span> My Target</a>
@@ -41,13 +44,13 @@
 			</ul>
 			<ul class="bottom-menu nav">
 				<li id="bottom-menu-dual-area">
-					<a href="#" class="menu-item bottom-menu-half-item text-center">
+					<a href="#" class="menu-item bottom-menu-half-item text-center" id="logout">
 						<span class="fa fa-lock fa-2x bottom-menu-half-item-icon"></span><br>
 						Logout
 					</a>
-					<a href="#" class="menu-item bottom-menu-half-item text-center">
+					<a href="#" class="menu-item bottom-menu-half-item text-center" id="profile">
 						<span class="fa fa-user fa-2x"></span><br>
-						Profile
+						<?php echo $active_user_name ?>
 					</a>
 				</li>
 				<li>

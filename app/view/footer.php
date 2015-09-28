@@ -16,16 +16,16 @@
 
 <!-- Make the side menu 2. level work correct -->
 <script>
-	$('.menu-item').click(function(){
+	$('.menu-item').click(function () {
 		$(".menu-item").removeClass("active-menu");
 		$(this).addClass("active-menu");
 	});
-	$('#target-li').click(function(){
-		if($(this).attr('next') == 'up')
+	$('#target-li').click(function () {
+		if ($(this).attr('next') == 'up')
 		{
 			$(this).attr('next', 'down');
 			$('#target-menu').slideUp(250);
-			setTimeout(function(){
+			setTimeout(function () {
 				$('#target-li').removeClass('submenu-shown');
 			}, 200);
 		}
@@ -36,4 +36,12 @@
 			$('#target-menu').slideDown(250);
 		}
 	});
+	var url = window.location;
+	// Will only work if string in href matches with location
+	$('a.menu-item[href="' + url + '"]').parent().addClass('active');
+
+	// Will also work for relative and absolute hrefs
+	$('a.menu-item').filter(function () {
+		return this.href == url;
+	}).parent().addClass('active');
 </script>

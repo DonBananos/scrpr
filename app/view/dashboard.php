@@ -5,6 +5,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $config = new Config();
 
+$view_id = 1; //Dashboard View
+
 if (isset($_SESSION['user_id']))
 {
 	$active_user_id = $_SESSION['user_id'];
@@ -27,12 +29,15 @@ else
 	</head>
 	<body>
 		<?php require './navbar/navbar.php'; ?>
-		<div id="page-wrapper" >
-            <div id="page-inner">
-				<div class="page-header">
-					<h1>Welcome <?php echo $active_user_name ?></h1>
-					<p class="lead">Great to see you again!</p>
-				</div>
+		<div id="page-wrapper">
+			<div class="page-header">
+				<h1>Welcome <?php echo $active_user_name ?></h1>
+				<p class="lead" id="subtitle">
+					Great to see you again!
+					<span class="pull-right last-login-span">
+						<i>Last login:</i> 28/09/2015
+					</span>
+				</p>
 			</div>
 		</div>
 		<?php require './footer.php'; ?>
