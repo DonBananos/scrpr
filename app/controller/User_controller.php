@@ -172,4 +172,10 @@ class User_controller
 		return $user_name;
 	}
 
+	public function get_all_target_details_from_user($user_id)
+	{
+		$tc = new Target_controller();
+		$target_details = $tc->retrieve_all_target_details_with_owner_id($user_id);
+		return $target_details;
+	}
 }

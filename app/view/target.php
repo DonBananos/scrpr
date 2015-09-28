@@ -48,8 +48,9 @@ if (isset($_GET['id']))
 	$title = $headline;
 	$subtitle = $lead;
 	$url = $target_details['url'];
-	$created = date("d/m-Y", $target_details['datetime']);
-	$user = $target_details['owner_id'];
+	$created = date("d/m-Y", strtotime($target_details['datetime']));
+	$user = $target_details['user_id'];
+	$owner = $uc->get_user_name_from_id($user);
 }
 else
 {
@@ -60,6 +61,8 @@ else
 	$subtitle = "Unnamed Target's subtitle";
 	$url = "http://www.domain.com/section-to-be-crawled/";
 	$created = date("d/m-Y", time());
+	$user = $_SESSION['user_id'];
+	$owner = $uc->get_user_name_from_id($user);
 }
 ?>
 <html>
@@ -95,7 +98,7 @@ else
 								<input type="text" name="subtitle" value="<?php echo $subtitle ?>" class="form-control subtitle-input invisible-input" onclick="this.select();">
 							</div>
 							<div class="col-lg-6 col-md-4 col-sm-2 hidden-xs">
-								<label class="pull-right form-label">Owner: <?php echo $active_user_name ?></label>
+								<label class="pull-right form-label">Owner: <?php echo $owner ?></label>
 							</div>
 							<div class="clearfix"></div>
 							<hr>
@@ -117,13 +120,33 @@ else
 							<br>
 							<div class="col-lg-12">
 								<a class="btn btn-default" onClick="AddKeywordRow()"><span class="fa fa-plus"></span> Add Keyword</a>
-								<input type="submit" class="btn btn-primary" value="Save Target" name="target-submit">
+								<?php
+								if ($new == false)
+								{
+									?>
+								<input type="submit" class="btn btn-warning" value="Save Target Edits" name="target-edit-submit">
+									<?php
+								}
+								else
+								{
+									?>
+									<input type="submit" class="btn btn-primary" value="Save Target" name="target-submit">
+									<?php
+								}
+								?>
 							</div>
 							<div class="clearfix"></div>
 						</form>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="content-box">
+						<h3 class="title">
+							Help
+						</h3>
+						<hr>
+						What is this all about? Get a basic understanding of ScrpR in 2 minutes!
+					</div>
 					<div class="content-box">
 						<h3 class="title">
 							Your Targets

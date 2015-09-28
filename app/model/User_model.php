@@ -183,7 +183,7 @@ class User_model
 		$user_config = new Config();
 		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
 		$db_con = $dbc->get_db_con();
-
+		
 		$sql = "SELECT user_id FROM user WHERE user_email = ?;";
 		$stmt = $db_con->prepare($sql);
 		if ($stmt === false)

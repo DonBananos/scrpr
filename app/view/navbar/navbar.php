@@ -24,15 +24,18 @@
 								New Target
 							</a>
 						</li>
-						<li>
-							<a href="<?php echo $config->get_base_url() ?>target/15/" class="menu-item"><span class="fa fa-link"></span> My Target</a>
-						</li>
-						<li>
-							<a href="<?php echo $config->get_base_url() ?>target/735/" class="menu-item"><span class="fa fa-link"></span> My Target</a>
-						</li>
-						<li>
-							<a href="<?php echo $config->get_base_url() ?>target/13/" class="menu-item"><span class="fa fa-link"></span> My Target</a>
-						</li>
+						<?php
+						$nav_uc = new User_controller();
+						$target_details = $nav_uc->get_all_target_details_from_user($active_user_id);
+						foreach ($target_details as $target_id => $details)
+						{
+							?>
+							<li>
+								<a href="<?php echo $config->get_base_url() ?>target/<?php echo $target_id ?>/" class="menu-item"><span class="fa fa-link"></span> <?php echo $details['title'] ?></a>
+							</li>
+							<?php
+						}
+						?>
 					</ul>
 				</li>  
 				<li>

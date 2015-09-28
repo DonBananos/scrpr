@@ -78,4 +78,18 @@ class Target_controller
 		}
 		return false;
 	}
+	
+	public function retrieve_all_target_details_with_owner_id($id)
+	{
+		$all_target_details = array();
+		
+		$tm = new Target_model();
+		$target_ids = $tm->get_all_target_ids_owned_by_user($id);
+		foreach($target_ids as $target_id)
+		{
+			$target_details = $tm->get_array_of_target_details($target_id);
+			$all_target_details[$target_id] = $target_details;
+		}
+		return $all_target_details;
+	}
 }

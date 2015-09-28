@@ -50,12 +50,10 @@ class Target_model
 		$db_con = $dbc->get_db_con();
 		
 		$sql = "SELECT "
-				. "target_title AS title, target_subtitle AS subtitle, "
-				. "target_url AS url, target_user_id AS owner_id, "
-				. "target_created AS datetime "
+				. "target_title, target_subtitle, target_url, target_user_id, "
+				. "target_created "
 				. "FROM target "
 				. "WHERE target_id = ?;";
-		//Prepare Statement
 		$stmt = $db_con->prepare($sql);
 		if ($stmt === false)
 		{
@@ -63,21 +61,46 @@ class Target_model
 		}
 		$stmt->bind_param('i', $id); //Bind parameters.
 		$stmt->execute(); //Execute
-		$stmt->bind_result($title, $subtitle, $url, $owner_id, $datetime); //Get ResultSet
+		$stmt->bind_result($target_title, $target_subtitle, $target_url, $user_id, $target_created); //Get ResultSet
 		$stmt->fetch();
 		$stmt->close();
 		$dbc->terminate_connection();
 		
 		$details = array();
-		$details['title'] = $title;
-		$details['subtitle'] = $subtitle;
-		$details['url'] = $url;
-		$details['owner_id'] = $owner_id;
-		$details['datetime'] = $datetime;
-		if (count($details) == 1)
+		$details['title'] = $target_title;
+		$details['subtitle'] = $target_subtitle;
+		$details['url'] = $target_url;
+		$details['user_id'] = $user_id;
+		$details['datetime'] = $target_created;
+		
+		if(count($details) > 0)
 		{
 			return $details;
 		}
-		return $db_con->error;
+		return false;
+	}
+	
+	public function get_all_target_ids_owned_by_user($id)
+	{
+		$user_config = new Config();
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$db_con = $dbc->get_db_con();
+		
+		$target_ids = array();
+		$sql = "SELECT target_id FROM target WHERE target_user_id = ? ORDER BY target_title ASC;";
+		$stmt = $db_con->prepare($sql); //Prepare Statement
+		if ($stmt === false)
+		{
+			trigger_error('SQL Error: ' . $dbCon->error, E_USER_ERROR);
+		}
+		$stmt->bind_param('i', $id); //Bind parameters.
+		$stmt->execute(); //Execute
+		$stmt->bind_result($target_id); //Get ResultSet
+		while($stmt->fetch())
+		{
+			array_push($target_ids, $target_id);
+		}
+		$stmt->close();
+		return $target_ids;
 	}
 }
