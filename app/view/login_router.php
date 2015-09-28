@@ -31,14 +31,14 @@ elseif (isset($_POST['sign-in-submit']))
 	if ($sign_in_result)
 	{
 		?>
-		<script>alert("Welcome!");
+		<script>
 			window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php';</script>
 		<?php
 	}
 	else
 	{
 		?>
-		<script>alert("BAAAH!");</script>
+		<script>alert("Email or password is wrong!");</script>
 		<?php
 	}
 }
