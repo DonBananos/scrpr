@@ -36,12 +36,14 @@
 			$('#target-menu').slideDown(250);
 		}
 	});
+	$(".menu-item").removeClass("active-menu");
 	var url = window.location;
 	// Will only work if string in href matches with location
-	$('a.menu-item[href="' + url + '"]').parent().addClass('active');
+	$('a.menu-item[href="' + url + '"]').addClass('active-menu');
 
 	// Will also work for relative and absolute hrefs
-	$('a.menu-item').filter(function () {
+	$('a.menu-item').filter(function () 
+	{
 		return this.href == url;
-	}).parent().addClass('active');
+	}).addClass('active-menu');
 </script>

@@ -3,7 +3,7 @@
 ======================*/
 body
 {
-	background-color: #01003b;
+	background-color: #000;
 	color: orange
 }
 .v-center {
@@ -137,8 +137,23 @@ body
 #page-inner,
 #page-wrapper > #page-inner
 {
-	background-color: #01003b !important;
+	background-color: #000 !important;
 	padding-top: 0 !important;
+}
+
+
+.content-box
+{
+	background-color: #ffffff;
+    /*border-color: lightblue;*/
+    /*border-style: solid;*/
+    /*border-width: thin;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 110%;
+    margin-bottom: 20px;
 }
 
 #subtitle
@@ -154,4 +169,37 @@ body
 	color: #aaa;
 	font-size: 70%;
 	margin-top: 10px;
+}
+
+.title-input
+{
+	font-size: 14pt;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.subtitle-input
+{
+	font-size: 11pt;
+}
+
+.invisible-input
+{
+	border: none; 
+	box-shadow: none;
+	margin-left: -10px;
+}
+
+.form-label
+{
+	color: #555;
+}
+
+.content-box > .title
+{
+	color: #555;
+	font-size: 14pt;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-left: 20px;
 }
