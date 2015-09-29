@@ -178,6 +178,7 @@ class Target_controller
 				$keyword['name'] = $keyword_name;
 				$keyword['path'] = $keyword_paths[$count];
 				array_push($keywords, $keyword);
+				$count++;
 			}
 			return $keywords;
 		}

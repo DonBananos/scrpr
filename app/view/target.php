@@ -42,7 +42,7 @@ if (isset($_POST['target-submit']))
 		<?php
 	}
 }
-elseif(isset($_POST['target-edit-submit']))
+elseif (isset($_POST['target-edit-submit']))
 {
 	$target_id = $_GET['id'];
 	$title = $_POST['title'];
@@ -50,9 +50,10 @@ elseif(isset($_POST['target-edit-submit']))
 	$url = $_POST['url'];
 	$user_id = $_SESSION['user_id'];
 
+	$existing_keyword_ids = $_POST['keyword-id'];
 	$keyword_names = $_POST['keyword-name'];
 	$keyword_paths = $_POST['keyword-path'];
-	
+
 	$keyword_ids = $tc->save_keywords_for_target($keyword_names, $keyword_paths, $target_id);
 }
 
@@ -133,11 +134,14 @@ else
 									foreach ($keyword_details as $keyword_id => $keyword)
 									{
 										?>
-										<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6" keyword_id="<?php echo $keyword_id ?>">
-											<input type="text" name="keyword-name[]" value="<?php echo $keyword['name'] ?>" class="form-control">
-										</div>
-										<div class="col-lg-7 col-md-7 col-sm-8 col-xs-6">
-											<input type="text" name="keyword-path[]" value="<?php echo $keyword['path'] ?>" class="form-control">
+										<div class="keyword-area" keyword_id="<?php echo $keyword_id ?>">
+											<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+												<input type="text" name="keyword-name[]" value="<?php echo $keyword['name'] ?>" class="form-control">
+												<input type="hidden" name="keyword-id[]" value="<?php echo $keyword_id ?>">
+											</div>
+											<div class="col-lg-7 col-md-7 col-sm-8 col-xs-6">
+												<input type="text" name="keyword-path[]" value="<?php echo $keyword['path'] ?>" class="form-control">
+											</div>
 										</div>
 										<div class="clearfix"></div>
 										<br>
