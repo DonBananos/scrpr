@@ -103,4 +103,33 @@ class Target_model
 		$stmt->close();
 		return $target_ids;
 	}
+	
+	public function update_target($id, $title, $subtitle, $url, $user_id)
+	{
+		$user_config = new Config();
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$db_con = $dbc->get_db_con();
+
+		//Create SQL Query
+		$sql = "UPDATE target SET target_title = ?, target_subtitle = ?, target_url = ?, target_user_id = ? WHERE target_id = ?;";
+		//Prepare Statement
+		$stmt = $db_con->prepare($sql);
+		if ($stmt === false)
+		{
+			trigger_error('SQL Error: ' . $db_con->error, E_USER_ERROR);
+		}
+		//Bind parameters.
+		$stmt->bind_param('sssii', $title, $subtitle, $url, $user_id, $id);
+		//Execute
+		$stmt->execute();
+		//Get ID of user just saved
+		$affected_rows = $stmt->affected_rows;
+		$stmt->close();
+		$dbc->terminate_connection();
+		if ($affected_rows > 0)
+		{
+			return true;
+		}
+		return $db_con->error;
+	}
 }

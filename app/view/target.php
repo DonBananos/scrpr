@@ -45,12 +45,39 @@ if (isset($_POST['target-submit']))
 elseif (isset($_POST['target-edit-submit']))
 {
 	$target_id = $_GET['id'];
+	$target_details = $tc->get_target_details_on_id($target_id);
 	$title = $_POST['title'];
 	$subtitle = $_POST['subtitle'];
 	$url = $_POST['url'];
 	$user_id = $_SESSION['user_id'];
 
-	if(isset($_POST['keyword_id']))
+	if ($tc->update_target($target_id, $title, $subtitle, $url, $user_id))
+	{
+		$update_message = "";
+		$old_title = $target_details['title'];
+		if ($old_title !== $title)
+		{
+			$update_message .= "$old_title has been changed to $title. ";
+		}
+		$old_subtitle = $target_details['subtitle'];
+		if ($old_subtitle !== $subtitle)
+		{
+			$update_message .= "$old_subtitle has been changed to $subtitle. ";
+		}
+		$old_url = $target_details['url'];
+		if ($old_url !== $url)
+		{
+			$update_message .= "$old_url has been changed to $url. ";
+		}
+		if (strlen($update_message) > 0)
+		{
+			?>
+			<script>alert('<?php echo $update_message ?>')</script>
+			<?php
+		}
+	}
+
+	if (isset($_POST['keyword_id']))
 	{
 		$existing_keyword_ids = $_POST['keyword-id'];
 	}

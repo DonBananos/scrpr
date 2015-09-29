@@ -119,7 +119,6 @@ class Target_controller
 		{
 			$keyword['target_id'] = $target_id;
 			$keyword_id = $this->get_keyword_path_id($keyword['path']);
-			echo 'K ID: '.$keyword_id.'<br>';
 			//Now that we have keyword ID and target ID, let's check if they
 			//are associated
 			if(!$km->check_if_target_has_keyword_associated($keyword_id, $target_id))
@@ -220,5 +219,15 @@ class Target_controller
 			$keyword_details[$keyword_id] = $details;
 		}
 		return $keyword_details;
+	}
+	
+	public function update_target($id, $title, $subtitle, $url, $user_id)
+	{
+		$tm = new Target_model;
+		if($tm->update_target($id, $title, $subtitle, $url, $user_id))
+		{
+			return true;
+		}
+		return false;
 	}
 }
