@@ -50,7 +50,10 @@ elseif (isset($_POST['target-edit-submit']))
 	$url = $_POST['url'];
 	$user_id = $_SESSION['user_id'];
 
-	$existing_keyword_ids = $_POST['keyword-id'];
+	if(isset($_POST['keyword_id']))
+	{
+		$existing_keyword_ids = $_POST['keyword-id'];
+	}
 	$keyword_names = $_POST['keyword-name'];
 	$keyword_paths = $_POST['keyword-path'];
 

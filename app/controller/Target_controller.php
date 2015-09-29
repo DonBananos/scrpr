@@ -110,6 +110,7 @@ class Target_controller
 
 	public function save_keywords_for_target($keyword_names, $keyword_paths, $target_id)
 	{
+		$km = new Keyword_model();
 		$saved_keyword_ids = array();
 		
 		$keywords = $this->make_array_of_submitted_keywords($keyword_names, $keyword_paths);
@@ -117,26 +118,46 @@ class Target_controller
 		foreach ($keywords as $keyword)
 		{
 			$keyword['target_id'] = $target_id;
-			if ($this->check_if_keyword_exists($keyword))
+			$keyword_id = $this->get_keyword_path_id($keyword['path']);
+			echo 'K ID: '.$keyword_id.'<br>';
+			//Now that we have keyword ID and target ID, let's check if they
+			//are associated
+			if(!$km->check_if_target_has_keyword_associated($keyword_id, $target_id))
 			{
-				//Keyword already exists... Don't do anything!
+				$number = $this->get_next_available_keyword_number_for_target($target_id);
+				$result = $km->save_new_keyword_target_association($keyword_id, $target_id, $keyword['name'], $number);
 			}
 			else
 			{
-				$km = new Keyword_model();
-				$result = $km->save_new_keyword($keyword['name'], $keyword['path'], $target_id, $this->get_next_available_keyword_number_for_target($target_id));
-				if ($result > 0)
-				{
-					$saved_keyword_ids[] = $result;
-				}
-				else
-				{
-					$saved_keyword_ids[] = false;
-				}
+				//Since the assosiation is exsisting, the result is true!
+				$result = true;
+			}
+			if($result)
+			{
+				$saved_keyword_ids[] = $keyword_id;
 			}
 		}
-		
 		return $saved_keyword_ids;
+	}
+	
+	private function get_keyword_path_id($path)
+	{
+		/*
+		 * Function that checks if keyword path exsist in DB, if it does, 
+		 * it returns the keyword_id, if it doesn't, then it creates it and 
+		 * returns the keyword id
+		 */
+		$km = new Keyword_model();
+		$result = $km->check_if_keyword_exists($path);
+		if($result !== false)
+		{
+			$keyword_id = $result;
+		}
+		else
+		{
+			$keyword_id = $km->save_new_keyword($path);
+		}
+		return $keyword_id;
 	}
 
 	private function check_if_keyword_exists($keyword)
