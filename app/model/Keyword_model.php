@@ -194,4 +194,32 @@ class Keyword_model
 		return false;
 	}
 
+	public function remove_target_keyword_association($target_id, $keyword_id)
+	{
+		$user_config = new Config();
+		$dbc = new Database_controller($user_config->get_db_host(), $user_config->get_db_user(), $user_config->get_db_pass(), $user_config->get_db_schema());
+		$db_con = $dbc->get_db_con();
+
+		//Create SQL Query
+		$sql = "DELETE FROM keyword_target WHERE keyword_id = ? AND target_id = ?;";
+		//Prepare Statement
+		$stmt = $db_con->prepare($sql);
+		if ($stmt === false)
+		{
+			trigger_error('SQL Error: ' . $db_con->error, E_USER_ERROR);
+		}
+		//Bind parameters.
+		$stmt->bind_param('ii', $keyword_id, $target_id);
+		//Execute
+		$stmt->execute();
+		//Get ID of user just saved
+		$affected_rows = $stmt->affected_rows;
+		$stmt->close();
+		$dbc->terminate_connection();
+		if ($affected_rows > 0)
+		{
+			return true;
+		}
+		return $db_con->error;
+	}
 }

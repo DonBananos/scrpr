@@ -235,3 +235,24 @@ body
 	color: orange;
 	cursor: pointer;
 }
+
+.red-icon
+{
+	color: red !important;
+}
+
+.fa-1x
+{
+	font-size: 1.5em;
+}
+
+.icon-link
+{
+	cursor: pointer !important;
+}
+
+.red-icon-disabled
+{
+	color: grey !important;
+	cursor: auto !important;
+}

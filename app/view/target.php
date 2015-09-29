@@ -22,10 +22,18 @@ else
 	die();
 }
 $tc = new Target_controller();
+$initial_subtitle = "Unnamed Target's subtitle";
 if (isset($_POST['target-submit']))
 {
 	$title = $_POST['title'];
-	$subtitle = $_POST['subtitle'];
+	if($_POST['subtitle'] != $initial_subtitle)
+	{
+		$subtitle = $_POST['subtitle'];
+	}
+	else
+	{
+		$subtitle = NULL;
+	}
 	$url = $_POST['url'];
 	$user_id = $_SESSION['user_id'];
 
@@ -47,7 +55,14 @@ elseif (isset($_POST['target-edit-submit']))
 	$target_id = $_GET['id'];
 	$target_details = $tc->get_target_details_on_id($target_id);
 	$title = $_POST['title'];
-	$subtitle = $_POST['subtitle'];
+	if($_POST['subtitle'] != $initial_subtitle)
+	{
+		$subtitle = $_POST['subtitle'];
+	}
+	else
+	{
+		$subtitle = NULL;
+	}
 	$url = $_POST['url'];
 	$user_id = $_SESSION['user_id'];
 
@@ -95,11 +110,19 @@ if (isset($_GET['id']))
 	$headline = $target_details['title'];
 	$lead = $target_details['subtitle'];
 	$title = $headline;
-	$subtitle = $lead;
-	$url = $target_details['url'];
-	$created = date("d/m-Y", strtotime($target_details['datetime']));
 	$user = $target_details['user_id'];
 	$owner = $uc->get_user_name_from_id($user);
+	if(empty($lead))
+	{
+		$subtitle = "How about a nice subtitle for your target?";
+		$lead = "Target of $owner";
+	}
+	else
+	{
+		$subtitle = $lead;
+	}
+	$url = $target_details['url'];
+	$created = date("d/m-Y", strtotime($target_details['datetime']));
 	$keyword_details = $tc->get_all_keyword_info_for_target($target_id);
 }
 else
@@ -108,7 +131,7 @@ else
 	$headline = "New Target";
 	$lead = "Create a new Target to spy on";
 	$title = "Unnamed Target";
-	$subtitle = "Unnamed Target's subtitle";
+	$subtitle = $initial_subtitle;
 	$url = "http://www.domain.com/section-to-be-crawled/";
 	$created = date("d/m-Y", time());
 	$user = $_SESSION['user_id'];
@@ -165,12 +188,15 @@ else
 									{
 										?>
 										<div class="keyword-area" keyword_id="<?php echo $keyword_id ?>">
-											<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+											<div class="col-lg-3 col-md-3 col-sm-4 col-xs-5">
 												<input type="text" name="keyword-name[]" value="<?php echo $keyword['name'] ?>" class="form-control">
 												<input type="hidden" name="keyword-id[]" value="<?php echo $keyword_id ?>">
 											</div>
-											<div class="col-lg-7 col-md-7 col-sm-8 col-xs-6">
+											<div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">
 												<input type="text" name="keyword-path[]" value="<?php echo $keyword['path'] ?>" class="form-control">
+											</div>
+											<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 hidden-link">
+												<a class="fa fa-times red-icon fa-1x icon-link red-icon-disabled" disabled></a>
 											</div>
 										</div>
 										<div class="clearfix"></div>
@@ -179,10 +205,10 @@ else
 									}
 								}
 								?>
-								<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+								<div class="col-lg-3 col-md-3 col-sm-4 col-xs-5">
 									<input type="text" name="keyword-name[]" placeholder="Keyword Name" class="form-control">
 								</div>
-								<div class="col-lg-7 col-md-7 col-sm-8 col-xs-6">
+								<div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">
 									<input type="text" name="keyword-path[]" placeholder="Keyword Path" class="form-control">
 								</div>
 								<div class="clearfix"></div>
@@ -218,7 +244,7 @@ else
 						<hr>
 						<div id="help-section">
 							<p class="description-lg">
-								What is this all about? Get a basic understanding of ScrpR in 2 minutes!
+								What is this all about? Get a basic understanding of ScrpЯ in 2 minutes!
 							</p>
 							<p class="description">
 								<strong>
@@ -240,7 +266,7 @@ else
 								An example could be, that you would like to stay 
 								updated on your teams latets matches, and therefore 
 								you point your keywords to the part of the page that 
-								shows the latest scores and date of the latets match.
+								shows the latest scores and date of the latets match.<br>
 								<strong>
 									Keyword Name:
 								</strong>
@@ -257,7 +283,7 @@ else
 								<a href="https://en.wikipedia.org/wiki/XPath">
 									Wikipedia
 								</a>.<br>
-								ScrpR recommend the 'FirePath' plugin to Firefox, to
+								ScrpЯ recommend the 'FirePath' plugin to Firefox, to
 								help you locate the correct Xpath.
 							</p>
 						</div>
@@ -285,7 +311,7 @@ else
 				var newField = "<div class='col-lg-3 col-md-3 col-sm-4 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Name' name='keyword-name[]'></div><div class='col-lg-7 col-md-7 col-sm-8 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Path' name='keyword-path[]'></div><div class='clearfix'></div><br>";
 				$('#keyword-area').append(newField);
 			}
-			$('#toggle-help').click(function(){
+			$('#toggle-help').click(function () {
 				$('#help-section').toggle(500);
 			})
 		</script>

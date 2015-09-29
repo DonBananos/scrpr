@@ -230,4 +230,14 @@ class Target_controller
 		}
 		return false;
 	}
+	
+	public function delete_keyword_from_target($target_id, $keyword_id)
+	{
+		$km = new Keyword_model();
+		if($km->remove_target_keyword_association($target_id, $keyword_id))
+		{
+			return TRUE;
+		}
+		return FALSE;
+	}
 }

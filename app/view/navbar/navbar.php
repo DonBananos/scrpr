@@ -3,7 +3,7 @@
 		<div id="main-menu">
 			<ul class="nav top-menu">
 				<li>
-					<a href="<?php echo $config->get_base_url() ?>" id="brand">ScrpR</a>
+					<a href="<?php echo $config->get_base_url() ?>" id="brand">ScrpЯ</a>
 				</li>
 				<li>
 					<a class="active-menu menu-item"  href="<?php echo $config->get_base_url() ?>dashboard" view_id = "1">

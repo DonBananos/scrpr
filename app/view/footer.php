@@ -52,7 +52,7 @@
 		$(this).attr('next', 'up');
 		$('#target-li').addClass('submenu-shown');
 		setTimeout(function () {
-			$('#target-menu').show();
+			$('#target-menu').slideDown(250);
 		}, 200);
 	}
 </script>
