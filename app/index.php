@@ -34,8 +34,8 @@ and open the template in the editor.
 					<hr>
 					<form class="col-lg-12" action="<?php echo $config->get_base_url() ?>login_router" method="POST">
 						<div class="input-group" style="width:340px;text-align:center;margin:0 auto;">
-							<input class="form-control input-lg" placeholder="Sign up with your email" type="email" name="email" id="email" onkeyup="checkEmail(this)" autofocus>
-							<span class="input-group-btn"><button class="btn btn-lg btn-primary disabled" type="submit" id="button" name="email-submit">>></button></span>
+							<input class="form-control input-lg" placeholder="Sign in with your email" type="email" name="email" id="email" onkeyup="checkEmail(this)" autofocus>
+							<span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit" id="button" name="email-submit">>></button></span>
 						</div>
 					</form>
 				</div>

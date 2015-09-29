@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 $config = new Config();
-
+$email_check="";
 if (isset($_POST['email-submit']))
 {
 	$email = $_POST['email'];
