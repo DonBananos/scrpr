@@ -213,17 +213,68 @@ else
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="content-box">
 						<h3 class="title">
-							Help
+							Help <span class="pull-right fa fa-chevron-down" title="Show Help" id="toggle-help"></span>
 						</h3>
 						<hr>
-						What is this all about? Get a basic understanding of ScrpR in 2 minutes!
+						<div id="help-section">
+							<p class="description-lg">
+								What is this all about? Get a basic understanding of ScrpR in 2 minutes!
+							</p>
+							<p class="description">
+								<strong>
+									Target name: 
+								</strong>
+								The name of the source you would like to crawl<br>
+								<strong>
+									Target subtitle:
+								</strong>
+								A short - optional - description of the target<br>
+								<strong>
+									Target URL:
+								</strong>
+								The URL you would like to crawl<br>
+								<strong>
+									Keywords:
+								</strong>
+								The section of the page you would like to crawl.<br>
+								An example could be, that you would like to stay 
+								updated on your teams latets matches, and therefore 
+								you point your keywords to the part of the page that 
+								shows the latest scores and date of the latets match.
+								<strong>
+									Keyword Name:
+								</strong>
+								The title of the section of the page you would like 
+								to crawl.<br>
+								In the above mentioned example, this could be: 
+								Home Team, Match Date etc.<br>
+								<strong>
+									Keyword Path:
+								</strong>
+								Xpath to guide the crawler into the correct part of
+								the site, that you wish to crawl. For more info on
+								Xpath, visit 
+								<a href="https://en.wikipedia.org/wiki/XPath">
+									Wikipedia
+								</a>.<br>
+								ScrpR recommend the 'FirePath' plugin to Firefox, to
+								help you locate the correct Xpath.
+							</p>
+						</div>
 					</div>
-					<div class="content-box">
-						<h3 class="title">
-							Your Targets
-						</h3>
-						<hr>
-					</div>
+					<?php
+					if (!$new)
+					{
+						?>
+						<div class="content-box">
+							<h3 class="title">
+								Latest results from '<?php echo $title ?>'
+							</h3>
+							<hr>
+						</div>
+						<?php
+					}
+					?>
 				</div>
 			</div>
 		</div>
@@ -234,6 +285,9 @@ else
 				var newField = "<div class='col-lg-3 col-md-3 col-sm-4 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Name' name='keyword-name[]'></div><div class='col-lg-7 col-md-7 col-sm-8 col-xs-6'><input type='text' class='form-control' placeholder='Keyword Path' name='keyword-path[]'></div><div class='clearfix'></div><br>";
 				$('#keyword-area').append(newField);
 			}
+			$('#toggle-help').click(function(){
+				$('#help-section').toggle(500);
+			})
 		</script>
 	</body>
 </html>

@@ -208,3 +208,30 @@ body
 {
 	color: #555;
 }
+
+.content-box > .description
+{
+	color: #555;
+	font-size: 10pt;
+	margin-left: 20px;
+	padding-top: 0;
+}
+
+.content-box > .description-lg
+{
+	color: #555;
+	font-size: 11pt;
+	margin-left: 20px;
+	padding-top: 0;
+}
+
+#help-section
+{
+	display: none;
+}
+
+#toggle-help
+{
+	color: orange;
+	cursor: pointer;
+}
