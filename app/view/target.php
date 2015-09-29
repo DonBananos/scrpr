@@ -29,13 +29,31 @@ if (isset($_POST['target-submit']))
 	$url = $_POST['url'];
 	$user_id = $_SESSION['user_id'];
 
+	$keyword_names = $_POST['keyword-name'];
+	$keyword_paths = $_POST['keyword-path'];
+
 	$result = $tc->create_new_target($title, $subtitle, $url, $user_id);
 	if (is_int($result))
 	{
+		$keyword_ids = $tc->save_keywords_for_target($keyword_names, $keyword_paths, $result);
+		var_dump($keyword_ids);
 		?>
 		<script>window.location = '<?php echo $config->get_base_url(); ?>target/<?php echo $result ?>/';</script>
 		<?php
 	}
+}
+elseif(isset($_POST['target-edit-submit']))
+{
+	$target_id = $_GET['id'];
+	$title = $_POST['title'];
+	$subtitle = $_POST['subtitle'];
+	$url = $_POST['url'];
+	$user_id = $_SESSION['user_id'];
+
+	$keyword_names = $_POST['keyword-name'];
+	$keyword_paths = $_POST['keyword-path'];
+	
+	$keyword_ids = $tc->save_keywords_for_target($keyword_names, $keyword_paths, $target_id);
 }
 
 if (isset($_GET['id']))
@@ -51,6 +69,7 @@ if (isset($_GET['id']))
 	$created = date("d/m-Y", strtotime($target_details['datetime']));
 	$user = $target_details['user_id'];
 	$owner = $uc->get_user_name_from_id($user);
+	$keyword_details = $tc->get_all_keyword_info_for_target($target_id);
 }
 else
 {
@@ -108,6 +127,24 @@ else
 							<div class="clearfix"></div>
 							<br>
 							<div id="keyword-area">
+								<?php
+								if (!$new)
+								{
+									foreach ($keyword_details as $keyword_id => $keyword)
+									{
+										?>
+										<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6" keyword_id="<?php echo $keyword_id ?>">
+											<input type="text" name="keyword-name[]" value="<?php echo $keyword['name'] ?>" class="form-control">
+										</div>
+										<div class="col-lg-7 col-md-7 col-sm-8 col-xs-6">
+											<input type="text" name="keyword-path[]" value="<?php echo $keyword['path'] ?>" class="form-control">
+										</div>
+										<div class="clearfix"></div>
+										<br>
+										<?php
+									}
+								}
+								?>
 								<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 									<input type="text" name="keyword-name[]" placeholder="Keyword Name" class="form-control">
 								</div>
@@ -121,10 +158,10 @@ else
 							<div class="col-lg-12">
 								<a class="btn btn-default" onClick="AddKeywordRow()"><span class="fa fa-plus"></span> Add Keyword</a>
 								<?php
-								if ($new == false)
+								if (!$new)
 								{
 									?>
-								<input type="submit" class="btn btn-warning" value="Save Target Edits" name="target-edit-submit">
+									<input type="submit" class="btn btn-warning" value="Save Target Edits" name="target-edit-submit">
 									<?php
 								}
 								else

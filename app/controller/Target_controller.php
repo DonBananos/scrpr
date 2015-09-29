@@ -48,7 +48,7 @@ class Target_controller
 		return $subtitle;
 	}
 
-	public function check_on_url($url)
+	private function check_on_url($url)
 	{
 
 		$newurl = "";
@@ -60,10 +60,9 @@ class Target_controller
 		{
 			$newurl = $url;
 		}
-                
 		if (!filter_var($newurl, FILTER_VALIDATE_URL) === false)
 		{
-			return $newurl;
+			return $url;
 		}
 		else
 		{
@@ -109,4 +108,95 @@ class Target_controller
 		return $all_target_details;
 	}
 
+	public function save_keywords_for_target($keyword_names, $keyword_paths, $target_id)
+	{
+		$saved_keyword_ids = array();
+		
+		$keywords = $this->make_array_of_submitted_keywords($keyword_names, $keyword_paths);
+		//Keyword is an array of keyword arrays with: name, path, number
+		foreach ($keywords as $keyword)
+		{
+			$keyword['target_id'] = $target_id;
+			if ($this->check_if_keyword_exists($keyword))
+			{
+				//Keyword already exists... Don't do anything!
+			}
+			else
+			{
+				$km = new Keyword_model();
+				$result = $km->save_new_keyword($keyword['name'], $keyword['path'], $target_id, $this->get_next_available_keyword_number_for_target($target_id));
+				if ($result > 0)
+				{
+					$saved_keyword_ids[] = $result;
+				}
+				else
+				{
+					$saved_keyword_ids[] = false;
+				}
+			}
+		}
+		
+		return $saved_keyword_ids;
+	}
+
+	private function check_if_keyword_exists($keyword)
+	{
+		//Keyword is an array with: name, path, number
+		$name = $keyword['name'];
+		$path = $keyword['path'];
+		$target_id = $keyword['target_id'];
+
+		$km = new Keyword_model();
+		return $km->check_if_keyword_exists($name, $path, $target_id);
+	}
+
+	private function get_next_available_keyword_number_for_target($target_id)
+	{
+		$highest_number = 0;
+		$km = new Keyword_model();
+		$keyword_ids = $km->get_all_keyword_ids_for_target($target_id);
+		foreach ($keyword_ids as $keyword_id)
+		{
+			$keyword_details = $km->get_array_of_keyword_details($keyword_id);
+			if ($keyword_details['number'] > $highest_number)
+			{
+				$highest_number = $keyword_details['number'];
+			}
+		}
+		$next_number = $highest_number + 1;
+		return $next_number;
+	}
+
+	private function make_array_of_submitted_keywords($keyword_names, $keyword_paths)
+	{
+		$keywords = array();
+		if(count($keyword_names) === count($keyword_paths))
+		{
+			$count = 0;
+			foreach($keyword_names as $keyword_name)
+			{
+				$keyword['name'] = $keyword_name;
+				$keyword['path'] = $keyword_paths[$count];
+				array_push($keywords, $keyword);
+			}
+			return $keywords;
+		}
+		else
+		{
+			die("Oh no! You fucked up big time!");
+		}
+	}
+	
+	public function get_all_keyword_info_for_target($target_id)
+	{
+		$keyword_details = array();
+		$km = new Keyword_model();
+		$keyword_ids = $km->get_all_keyword_ids_for_target($target_id);
+		foreach($keyword_ids as $keyword_id)
+		{
+			$details = $km->get_array_of_keyword_details($keyword_id);
+			$keyword_details[$keyword_id] = $details;
+		}
+		return $keyword_details;
+	}
 }
