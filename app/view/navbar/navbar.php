@@ -1,12 +1,16 @@
 <?php
+if (isset($_GET['logout']))
+{
+	$logout = $_GET ['lo'];
 
-$logout = $_GET ['logout'];
-
-if($logout == '1'){
-    session_destroy();
-    header("location:../index.php");
+	if ($logout == '1')
+	{
+		session_destroy();
+		?>
+		<script>window.location.reload();</script>
+		<?php
+	}
 }
-
 ?>
 
 <nav class="navbar-default navbar-side" role="navigation" id="side-menu">
@@ -35,17 +39,18 @@ if($logout == '1'){
                                 New Target
                             </a>
                         </li>
-<?php
-$nav_uc = new User_controller();
-$target_details = $nav_uc->get_all_target_details_from_user($active_user_id);
-foreach ($target_details as $target_id => $details) {
-    ?>
-                            <li>
-                                <a href="<?php echo $config->get_base_url() ?>target/<?php echo $target_id ?>/" class="menu-item"><span class="fa fa-link"></span> <?php echo $details['title'] ?></a>
-                            </li>
-    <?php
-}
-?>
+						<?php
+						$nav_uc = new User_controller();
+						$target_details = $nav_uc->get_all_target_details_from_user($active_user_id);
+						foreach ($target_details as $target_id => $details)
+						{
+							?>
+							<li>
+								<a href="<?php echo $config->get_base_url() ?>target/<?php echo $target_id ?>/" class="menu-item"><span class="fa fa-link"></span> <?php echo $details['title'] ?></a>
+							</li>
+							<?php
+						}
+						?>
                     </ul>
                 </li>  
                 <li>
@@ -57,13 +62,13 @@ foreach ($target_details as $target_id => $details) {
             </ul>
             <ul class="bottom-menu nav">
                 <li id="bottom-menu-dual-area">
-                    <a href="?logout=1" class="menu-item bottom-menu-half-item text-center" name="logout" id="logout">
+                    <a href="?lo=1" class="menu-item bottom-menu-half-item text-center" name="logout" id="logout">
                         <span class="fa fa-lock fa-2x bottom-menu-half-item-icon"></span><br>
                         Logout
                     </a>
                     <a href="#" class="menu-item bottom-menu-half-item text-center" id="profile">
                         <span class="fa fa-user fa-2x"></span><br>
-<?php echo $active_user_name ?>
+						<?php echo $active_user_name ?>
                     </a>
                 </li>
                 <li>

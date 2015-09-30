@@ -32,7 +32,7 @@ elseif (isset($_POST['sign-in-submit']))
 	{
 		?>
 		<script>
-			window.location = '<?php echo $config->get_base_url() ?>view/dashboard.php';</script>
+			window.location = '<?php echo $config->get_base_url() ?>dashboard';</script>
 		<?php
 	}
 	else
