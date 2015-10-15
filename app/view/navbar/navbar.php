@@ -1,18 +1,3 @@
-<?php
-if (isset($_GET['logout']))
-{
-	$logout = $_GET ['lo'];
-
-	if ($logout == '1')
-	{
-		session_destroy();
-		?>
-		<script>window.location.reload();</script>
-		<?php
-	}
-}
-?>
-
 <nav class="navbar-default navbar-side" role="navigation" id="side-menu">
     <div class="sidebar-collapse">
         <div id="main-menu">
@@ -62,7 +47,7 @@ if (isset($_GET['logout']))
             </ul>
             <ul class="bottom-menu nav">
                 <li id="bottom-menu-dual-area">
-                    <a href="?lo=1" class="menu-item bottom-menu-half-item text-center" name="logout" id="logout">
+                    <a href="<?php echo $config->get_base_url() ?>logout" class="menu-item bottom-menu-half-item text-center" name="logout" id="logout">
                         <span class="fa fa-lock fa-2x bottom-menu-half-item-icon"></span><br>
                         Logout
                     </a>
